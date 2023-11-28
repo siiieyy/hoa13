@@ -1,0 +1,20 @@
+---
+- name: OpenStack Installation Playbook
+  hosts: compute
+  become: true
+  tasks:
+
+  - name: Install SQL Database (example for MySQL)
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - mariadb-server
+      - python3-PyMySQL
+
+  - name: Install Message Queue (example for RabbitMQ)
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - rabbitmq-server

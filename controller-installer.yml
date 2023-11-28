@@ -1,0 +1,26 @@
+---
+- name: Install NTP and OpenStack packages
+  hosts: controller
+  become: true
+  tasks:
+
+  - name: Install NTP
+    apt:
+      name: ntp
+      state: present
+
+  - name: Configure NTP
+    systemd:
+      name: ntp
+      enabled: yes
+      state: started
+
+  - name: Install OpenStack packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - python3-openstackclient
+      - python3-nova
+      - neutron-server
+      - neutron-linuxbridge-agent

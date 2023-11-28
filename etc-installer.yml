@@ -1,0 +1,30 @@
+---
+- name: OpenStack Installation Playbook
+  hosts: etc
+  become: true
+  tasks:
+
+  - name: Install Memcached
+    apt:
+      name: memcached
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Install Memcached
+    yum:
+      name: memcached
+      state: present
+    when: ansible_distribution == "CentOS"
+
+  - name: Install Etcd
+    apt:
+      name: etcd
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Install Etcd
+    yum:
+      name: etcd
+      state: present
+    when: ansible_distribution == "CentOS"
+
